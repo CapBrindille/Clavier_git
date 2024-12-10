@@ -31,24 +31,30 @@ void loop() {
   while (touche == false){
     touche = clavier.getKey();
   }
+  Serial.print("Mot de passe : ");
+  Serial.print(touche);
   if (touche == mdp[0]){
     char touche2 = clavier.getKey();
     while(touche2 == false)
     {
       touche2 = clavier.getKey();
     }
+    Serial.print(touche2);
     if (touche2 == mdp[1]){
       char touche3 = clavier.getKey();
       while (touche3 == false){
         touche3 = clavier.getKey();
       }
+      Serial.print(touche3);
       if (touche3 == mdp[2]){
         char touche4 = clavier.getKey();
         while (touche4 == false){
           touche4 = clavier.getKey();
         }
+        Serial.print(touche4);
         if (touche4 == mdp[3]){
           digitalWrite(10, HIGH);
+          Serial.println();
           Serial.println("Mot de passe correct");
           Serial.println();
         }
@@ -56,6 +62,7 @@ void loop() {
     }
   }
   else{
+    Serial.println();
     Serial.println("Mot de passe incorrect");
     digitalWrite(10, LOW);
   }
