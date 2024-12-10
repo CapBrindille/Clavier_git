@@ -18,11 +18,14 @@ Keypad clavier = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);      //
 
 char mdp[4] = {'6','4','2','0'};
  int i = 0;
+int fail = 3;
 
 void setup() {
   Serial.begin(9600);                         //Initialisation du moniteur série
   pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
   digitalWrite(10,LOW);
+  digitalWrite(11,LOW);
   
 }
 
@@ -57,14 +60,26 @@ void loop() {
           Serial.println();
           Serial.println("Mot de passe correct");
           Serial.println();
+          fail = 3;
         }
       }     
     }
   }
   else{
     Serial.println();
-    Serial.println("Mot de passe incorrect");
     digitalWrite(10, LOW);
+    fail = fail - 1 ;
+    Serial.print("Mot de passe incorrect, ");
+    Serial.print(fail);
+    Serial.println(" essai(s) restant(s)");
+    if (fail == 0){
+      digitalWrite(11, HIGH);
+      Serial.print("Aucun essai restant : blockage de la carte");
+      delay(5000);
+      fail = 3;
+      digitalWrite(11,LOW);
+    }
+
   }
   
   
