@@ -21,12 +21,12 @@ void setup() {
 }
 
 void loop() {
-  char key = clavier.getKey();
-  if(key) {
-    if (key == '4') {
-      Serial.println("La touche 4 est pressée --> allumage de la led verte");
+  char key = clavier.getKey();                //On check si une touche a été pressé 
+  if(key) {                                   //Si une touche a bien été touché 
+    if (key == '4') {                         //On vérifie si la touche en question est le 4
+      Serial.println("La touche 4 est pressée --> allumage de la led verte");       //On affiche qu'on a bien pressé la touche 4
     }
-    else {
+    else {                                    //Si ce n'est pas la touche 4, on affiche quelle touche a été touché 
       Serial.print("La touche ");
       Serial.print(key);
       Serial.println(" est pressée");
