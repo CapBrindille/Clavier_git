@@ -16,21 +16,50 @@ byte colPins[COLS] = {9, 8, 7, 6};      //Broches de l'Arduino sur lesquelles le
 
 Keypad clavier = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);      //On associe les broches des colognes comme étant pour les colognes, idem pour les lignes
 
+char mdp[4] = {'6','4','2','0'};
+ int i = 0;
+
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600);                         //Initialisation du moniteur série
+  pinMode(10, OUTPUT);
+  digitalWrite(10,LOW);
+  
 }
 
 void loop() {
-  char key = clavier.getKey();                //On check si une touche a été pressé 
-  if(key) {                                   //Si une touche a bien été touché 
-    if (key == '4') {                         //On vérifie si la touche en question est le 4
-      Serial.println("La touche 4 est pressée --> allumage de la led verte");       //On affiche qu'on a bien pressé la touche 4
+  char touche = clavier.getKey();
+  while (touche == false){
+    touche = clavier.getKey();
+  }
+  if (touche == mdp[0]){
+    char touche2 = clavier.getKey();
+    while(touche2 == false)
+    {
+      touche2 = clavier.getKey();
     }
-    else {                                    //Si ce n'est pas la touche 4, on affiche quelle touche a été touché 
-      Serial.print("La touche ");
-      Serial.print(key);
-      Serial.println(" est pressée");
+    if (touche2 == mdp[1]){
+      char touche3 = clavier.getKey();
+      while (touche3 == false){
+        touche3 = clavier.getKey();
+      }
+      if (touche3 == mdp[2]){
+        char touche4 = clavier.getKey();
+        while (touche4 == false){
+          touche4 = clavier.getKey();
+        }
+        if (touche4 == mdp[3]){
+          digitalWrite(10, HIGH);
+          Serial.println("Mot de passe correct");
+          Serial.println();
+        }
+      }     
     }
   }
+  else{
+    Serial.println("Mot de passe incorrect");
+    digitalWrite(10, LOW);
+  }
+  
+  
 
 }
