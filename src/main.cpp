@@ -5,10 +5,10 @@
 #define COLS 4                //Le clavier aura 4 colognes 
 #define ROWS 4                //Le clavier aura 4 lignes
 char keys[ROWS][COLS] = {
-  {'1','2','3','A'},
-  {'4','5','6','B'},          //Disposition des touches du clavier
-  {'7','8','9','C'},
-  {'*','0','#','D'}
+  {'1','2','3','F'},
+  {'4','5','6','E'},          //Disposition des touches du clavier
+  {'7','8','9','D'},
+  {'A','0','B','C'}
 };
 
 byte rowPins[ROWS] = {5, 4, 3, 2};      //Broches de l'Arduino sur lesquelles les lignes du clavier seront connectées
