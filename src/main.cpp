@@ -19,6 +19,8 @@ Keypad clavier = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);      //
 char mdp[4] = {'6','4','2','0'};
  int i = 0;
 int fail = 3;
+char essai[4];
+bool clr = false;
 
 void setup() {
   Serial.begin(9600);                         //Initialisation du moniteur série
@@ -30,7 +32,7 @@ void setup() {
 }
 
 void loop() {
-  char touche = clavier.getKey();
+  /*char touche = clavier.getKey();
   while (touche == false){
     touche = clavier.getKey();
   }
@@ -80,8 +82,44 @@ void loop() {
       digitalWrite(11,LOW);
     }
 
+  }*/
+ Serial.print("Veuillez rentrer votre mot de passe : ");
+ for (int i = 0; i <= 3; i++){
+ char touche = clavier.getKey();
+ while (touche == false){
+  touche = clavier.getKey();
+ }
+ if (touche == 'C'){
+  essai[4] = {};
+  i = 0;
+  fail = 3 ;
+  
+ }
+ else {
+ essai[i] == touche;
+ Serial.print(touche);
+ }
+}
+ Serial.println();
+ if (essai == mdp) {
+  digitalWrite(10, HIGH);
+  Serial.print("... Mot de passe correct");
+  fail = 3 ;
+  delay(5000);
+  digitalWrite(10, LOW);
+ }
+ else {
+  Serial.print("... Mot de passe incorrect, ");
+  fail = fail - 1 ;
+  Serial.print(fail);  
+  Serial.println(" essai(s) restant(s)");
+  
+  if (fail == 0) {
+    digitalWrite(11, HIGH);
+    Serial.println("Trop d'essais incorrects, blocage de la carte ");
+    delay(5000);
+    digitalWrite(11, LOW);
+    fail = 3;
   }
-  
-  
-
+ }
 }
