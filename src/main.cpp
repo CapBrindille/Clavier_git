@@ -1,4 +1,12 @@
+/*
+  Code fait par mathis BENOIT
+  Compileur : Microsoft Visual Studio Code v1.96.0
+  IDE : PlateformIO v3.3.3
 
+  Programme pour faire fonctionner un petit clavier en 4x4 en utilisant une carte Arduino Mega
+
+  Câblage : 
+*/
 #include <Arduino.h>          //Librairie pour utiliser les commandes de l'IDE Arduino sur Visual Studio Code
 #include <Keypad.h>           //Librairie pour utiliser le clavier 
 
