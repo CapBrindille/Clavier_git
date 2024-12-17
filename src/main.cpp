@@ -41,43 +41,49 @@ void setup() {
 }
 
 void loop() {
+ bool clear = 0;
  Serial.print("Veuillez rentrer votre mot de passe : ");
  for (int i = 0; i <= 3; i++){    //On demande le code à 4 chiffres
  char touche = clavier.getKey();
  while (touche == false){
   touche = clavier.getKey();
  }
- if (touche == 'C'){      //Création d'une touche "clear" qui réinitialise le mot de passe
-  essai[4] = {};
-  i = 0;
-  fail = 3 ;
+ if (touche == 'C'){     //Création d'une touche "clear" qui réinitialise le mot de passe
+  essai[i] = {};
+  i = 3;
+  clear = 1;
   
  }
  else {
  essai[i] = touche;
  Serial.print(touche);    //on affiche le code qui est rentré 
  }
-}
+
+ }
+
  Serial.println();
+ if (clear != 1){
  if (essai[0] == mdp[0] && essai[1]==mdp[1] && essai[2]==mdp[2] && essai[3]==mdp[3]) { //vu que le tuple mdp se termine par un ETX (end of txt), il faut comparer les éléments 1 à 1
   digitalWrite(10, HIGH);     //On allume la led verte
   Serial.println("... Mot de passe correct");
-  fail = 3 ;
+  fail = 3 ;      //On remet le nombre d'essais à 3
   delay(5000);
-  digitalWrite(10, LOW);
+  digitalWrite(10, LOW);    //On eteint la led verte après 5s
  }
  else {
   Serial.print("... Mot de passe incorrect, ");
-  fail = fail - 1 ;
+  fail = fail - 1 ;       //Si le mdp est faux, on enlève un essai
   Serial.print(fail);  
   Serial.println(" essai(s) restant(s)");
   
-  if (fail == 0) {
-    digitalWrite(11, HIGH);
+  if (fail == 0) {            //Si le nombre d'essais tombre à 0, alors la carte se bloque
+    digitalWrite(11, HIGH);   //On allume la led rouge
     Serial.println("Trop d'essais incorrects, blocage de la carte ");
     delay(5000);
-    digitalWrite(11, LOW);
-    fail = 3;
+    digitalWrite(11, LOW);    //On éteint la led rouge
+    fail = 3;                 //On remet le nombre d'essais à 3
   }
  }
+ }
+
 }
