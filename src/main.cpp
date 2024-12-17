@@ -40,64 +40,13 @@ void setup() {
 }
 
 void loop() {
-  /*char touche = clavier.getKey();
-  while (touche == false){
-    touche = clavier.getKey();
-  }
-  Serial.print("Mot de passe : ");
-  Serial.print(touche);
-  if (touche == mdp[0]){
-    char touche2 = clavier.getKey();
-    while(touche2 == false)
-    {
-      touche2 = clavier.getKey();
-    }
-    Serial.print(touche2);
-    if (touche2 == mdp[1]){
-      char touche3 = clavier.getKey();
-      while (touche3 == false){
-        touche3 = clavier.getKey();
-      }
-      Serial.print(touche3);
-      if (touche3 == mdp[2]){
-        char touche4 = clavier.getKey();
-        while (touche4 == false){
-          touche4 = clavier.getKey();
-        }
-        Serial.print(touche4);
-        if (touche4 == mdp[3]){
-          digitalWrite(10, HIGH);
-          Serial.println();
-          Serial.println("Mot de passe correct");
-          Serial.println();
-          fail = 3;
-        }
-      }     
-    }
-  }
-  else{
-    Serial.println();
-    digitalWrite(10, LOW);
-    fail = fail - 1 ;
-    Serial.print("Mot de passe incorrect, ");
-    Serial.print(fail);
-    Serial.println(" essai(s) restant(s)");
-    if (fail == 0){
-      digitalWrite(11, HIGH);
-      Serial.print("Aucun essai restant : blockage de la carte");
-      delay(5000);
-      fail = 3;
-      digitalWrite(11,LOW);
-    }
-
-  }*/
  Serial.print("Veuillez rentrer votre mot de passe : ");
- for (int i = 0; i <= 3; i++){
+ for (int i = 0; i <= 3; i++){    //On demande le code à 4 chiffres
  char touche = clavier.getKey();
  while (touche == false){
   touche = clavier.getKey();
  }
- if (touche == 'C'){
+ if (touche == 'C'){      //Création d'une touche "clear" qui réinitialise le mot de passe
   essai[4] = {};
   i = 0;
   fail = 3 ;
@@ -105,10 +54,15 @@ void loop() {
  }
  else {
  essai[i] == touche;
- Serial.print(touche);
+ Serial.print(touche);    //on affiche le code qui est rentré 
  }
 }
  Serial.println();
+ Serial.println("affichage des tuples");
+ Serial.println(essai);
+ //char essaimdp = essai;
+ //Serial.println(essaimdp);
+ Serial.println(mdp);
  if (essai == mdp) {
   digitalWrite(10, HIGH);
   Serial.print("... Mot de passe correct");
