@@ -25,7 +25,7 @@ byte colPins[COLS] = {9, 8, 7, 6};      //Broches de l'Arduino sur lesquelles le
 Keypad clavier = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);      //On associe les broches des colognes comme étant pour les colognes, idem pour les lignes
 
 char mdp[4] = {'6','4','2','0'};
- int i = 0;
+int i = 0;
 int fail = 3;
 char essai[4];
 bool clr = false;
@@ -36,6 +36,7 @@ void setup() {
   pinMode(11, OUTPUT);
   digitalWrite(10,LOW);
   digitalWrite(11,LOW);
+  Serial.println(mdp[5]);
   
 }
 
@@ -53,19 +54,14 @@ void loop() {
   
  }
  else {
- essai[i] == touche;
+ essai[i] = touche;
  Serial.print(touche);    //on affiche le code qui est rentré 
  }
 }
  Serial.println();
- Serial.println("affichage des tuples");
- Serial.println(essai);
- //char essaimdp = essai;
- //Serial.println(essaimdp);
- Serial.println(mdp);
- if (essai == mdp) {
-  digitalWrite(10, HIGH);
-  Serial.print("... Mot de passe correct");
+ if (essai[0] == mdp[0] && essai[1]==mdp[1] && essai[2]==mdp[2] && essai[3]==mdp[3]) { //vu que le tuple mdp se termine par un ETX (end of txt), il faut comparer les éléments 1 à 1
+  digitalWrite(10, HIGH);     //On allume la led verte
+  Serial.println("... Mot de passe correct");
   fail = 3 ;
   delay(5000);
   digitalWrite(10, LOW);
